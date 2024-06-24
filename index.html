@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io Control App</title>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.js"></script>
+</head>
+
+<body>
+    <h1>Socket.io Control App</h1>
+
+    <button onclick="sendControlSignal('lock')">Lock</button>
+    <button onclick="sendControlSignal('unlock')">Unlock</button>
+
+    <script>
+        // Connect to the Socket.io server
+        const socket = io('https://south-bright-suggestion.glitch.me/', {
+            transports: ['websocket', 'polling', 'flashsocket'],
+        });
+
+        // Listen for 'connect' event
+        socket.on('connect', () => {
+            console.log('Connected to server');
+            alert('Connected to server'); // Example: Show an alert when connected
+        });
+
+        // Listen for 'control' event
+        socket.on('control', (data) => {
+            console.log('Control signal received:', data);
+            alert('Control signal received: ' + data); // Example: Show an alert with the control signal
+        });
+
+        // Send control signal to the server
+        function sendControlSignal(signal) {
+            socket.emit('control', signal);
+            console.log('Control signal sent:', signal);
+            alert('Control signal sent: ' + signal); // Example: Show an alert when signal is sent
+        }
+    </script>
+</body>
+
+</html>
