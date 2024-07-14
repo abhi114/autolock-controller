@@ -5,3 +5,5 @@
 ## developed in java and designed for android 
 
 ## an website version also Available to check the server status and perform the same actions
+
+# the website version is available in the index.html
